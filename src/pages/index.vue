@@ -20,6 +20,7 @@ const { t } = useI18n()
       <a rel="noreferrer" href="https://github.com/antfu/vitesse" target="_blank">
         Vitesse
       </a>
+      <el-button>Hello World</el-button>
     </p>
     <p>
       <em text-sm opacity-75>{{ t('intro.desc') }}</em>
