@@ -49,38 +49,39 @@ const rowConfig = computed(() => {
     :label-position="formConfig.labelPosition" :label-width="formConfig.labelWidth"
     :require-asterisk-position="formConfig.requireAsteriskPosition" :size="formConfig.size"
     :disabled="formConfig.disabled" :scroll-to-error="formConfig.scrollToError" :class="formConfig.class"
+    w="100%"
   >
     <el-row :gutter="rowConfig.gutter" :justify="rowConfig.justify" :align="rowConfig.align" :tag="rowConfig.tag">
       <template v-for="(item, index) in items" :key="index">
-        <template v-if="item.col.isShow !== undefined ? item.col.isShow : true">
+        <template v-if="item.isShow !== undefined ? item.isShow : true">
           <el-col
-            :span="item.col.span" :offset="item.col.offset" :push="item.col.push" :pull="item.col.pull"
-            :xs="item.col.xs" :sm="item.col.sm" :md="item.col.md" :lg="item.col.lg" :xl="item.col.xl"
-            :tag="item.col.tag"
+            :span="item.span" :offset="item.offset" :push="item.push" :pull="item.pull"
+            :xs="item.xs" :sm="item.sm" :md="item.md" :lg="item.lg" :xl="item.xl"
+            :tag="item.tag"
           >
-            <FormItem :config="item.formItem">
-              <template v-if="!item.form.children">
+            <FormItem :config="item">
+              <template v-if="!item.children">
                 <template
-                  v-if="item.form.type === 'text' || item.form.type === 'textarea' || item.form.type === 'password' || item.form.type === 'tel' || item.form.type === 'number' || item.form.type === 'email'"
+                  v-if="item.type === 'text' || item.type === 'textarea' || item.type === 'password' || item.type === 'tel' || item.type === 'number' || item.type === 'email'"
                 >
-                  <FormInput :type="item.form.type" :model="formModel" :config="item.form" :prop="item.formItem.prop" />
+                  <FormInput :type="item.type" :model="formModel" :config="item" :prop="item.prop" />
                 </template>
-                <template v-if="item.form.type === 'select'">
-                  <FormSelect :model="formModel" :config="item.form" :prop="item.formItem.prop" />
+                <template v-if="item.type === 'select'">
+                  <FormSelect :model="formModel" :config="item" :prop="item.prop" />
                 </template>
-                <template v-if="item.form.type === 'radio' || item.form.type === 'radio-button'">
-                  <FormRadio :type="item.form.type" :model="formModel" :config="item.form" :prop="item.formItem.prop" />
+                <template v-if="item.type === 'radio' || item.type === 'radio-button'">
+                  <FormRadio :type="item.type" :model="formModel" :config="item" :prop="item.prop" />
                 </template>
-                <template v-if="item.form.type === 'checkbox' || item.form.type === 'checkbox-group'">
-                  <FormCheckbox :type="item.form.type" :model="formModel" :config="item.form" :prop="item.formItem.prop" />
+                <template v-if="item.type === 'checkbox' || item.type === 'checkbox-group'">
+                  <FormCheckbox :type="item.type" :model="formModel" :config="item" :prop="item.prop" />
                 </template>
-                <template v-if="item.form.type === 'date'">
-                  <FormDatepicker :type="item.form.type" :model="formModel" :config="item.form" :prop="item.formItem.prop" />
+                <template v-if="item.type === 'date'">
+                  <FormDatepicker :type="item.type" :model="formModel" :config="item" :prop="item.prop" />
                 </template>
               </template>
 
-              <template v-if="item.form.children && item.form.children.items && item.form.children.items.length">
-                <FormItems :config="item.form.children" :model="formModel" />
+              <template v-if="item.children && item.children.items && item.children.items.length">
+                <FormItems :config="item.children" :model="formModel" />
               </template>
             </FormItem>
           </el-col>
@@ -89,4 +90,12 @@ const rowConfig = computed(() => {
     </el-row>
   </component>
 </template>
+
+<style lang="scss" scoped>
+.el-col {
+  &:not(:last-child) {
+    margin-bottom: 20px;
+  }
+}
+</style>
 

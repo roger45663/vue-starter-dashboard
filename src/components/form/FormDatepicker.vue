@@ -23,7 +23,18 @@ const formModel = useVModel(props, 'model', emit)
 
 <template>
   <el-date-picker
-    v-model="formModel[prop]" :clearable="false" :type="type" :placeholder="config.placeholder"
+    v-model="formModel[prop]" :type="type" :clearable="config.clearable" :placeholder="config.placeholder"
     :disabled="config.disabled" :value-format="config.valueFormat"
   />
 </template>
+
+<style lang="scss">
+.el-date-editor {
+  width: 100% !important;
+
+  .el-input__wrapper {
+    width: 100%;
+  }
+
+}
+</style>
